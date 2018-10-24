@@ -103,6 +103,16 @@ public class VentanaPpal {
 		frmSistemaDeArchivos.getContentPane().add(textConsole);
 		
 		JButton btnPreOrden = new JButton("Pre Orden");
+		btnPreOrden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.mostrarPreOrden()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
+			}
+		});
 		btnPreOrden.setEnabled(false);
 		btnPreOrden.setBounds(194, 41, 102, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnPreOrden);
@@ -111,6 +121,12 @@ public class VentanaPpal {
 		btnPostOrden.setEnabled(false);
 		btnPostOrden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.mostrarPostOrden()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
 			}
 		});
 		btnPostOrden.setBounds(298, 41, 102, 23);

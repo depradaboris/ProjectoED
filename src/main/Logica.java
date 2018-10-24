@@ -138,5 +138,8 @@ public class Logica {
 		return nuevo;
 	}
 	
+	public Iterable<String> mostrarPorNiveles(){
+		if
+	}
 }
 	
