@@ -27,31 +27,17 @@ public class VentanaPpal {
 	private JFrame frmSistemaDeArchivos;
 	private JTextField txtAddPadre;
 	private JTextField textRuta;
-	private JTextField textField_1;
+	private JTextField textMuestraRuta;
 	private JTextField textRaiz;
 	private JTextField textAddNew;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPpal window = new VentanaPpal();
-					window.frmSistemaDeArchivos.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
 	 */
 	public VentanaPpal() {
 		initialize();
+		frmSistemaDeArchivos.setVisible(true);
 	}
 
 	/**
@@ -99,10 +85,20 @@ public class VentanaPpal {
 		textConsole.setEnabled(false);
 		textConsole.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textConsole.setEditable(false);
-		textConsole.setBounds(194, 78, 310, 166);
+		textConsole.setBounds(194, 75, 310, 166);
 		frmSistemaDeArchivos.getContentPane().add(textConsole);
 		
 		JButton btnPreOrden = new JButton("Pre Orden");
+		btnPreOrden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.mostrarPreOrden()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
+			}
+		});
 		btnPreOrden.setEnabled(false);
 		btnPreOrden.setBounds(194, 41, 102, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnPreOrden);
@@ -111,12 +107,28 @@ public class VentanaPpal {
 		btnPostOrden.setEnabled(false);
 		btnPostOrden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.mostrarPostOrden()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
 			}
 		});
 		btnPostOrden.setBounds(298, 41, 102, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnPostOrden);
 		
 		JButton btnNiveles = new JButton("Por niveles");
+		btnNiveles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.mostrarPorNiveles()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
+			}
+		});
 		btnNiveles.setEnabled(false);
 		btnNiveles.setBounds(402, 41, 102, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnNiveles);
@@ -128,6 +140,23 @@ public class VentanaPpal {
 		frmSistemaDeArchivos.getContentPane().add(lblVer);
 		
 		JButton btnMostrarRuta = new JButton("Mostrar Ruta");
+		btnMostrarRuta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s="";
+				try{
+					if(textRuta.getText().equals(""))
+						JOptionPane.showMessageDialog(null, "Ninguno de los campos debe estar vacio", "Error", JOptionPane.WARNING_MESSAGE);
+					else {
+						s=logica.mostrarRuta();
+					}
+				}catch(InvalidOperationException e1) {
+					JOptionPane.showMessageDialog(null, "El archivo no existe", "Error", JOptionPane.ERROR_MESSAGE);
+				}catch(InvalidFileException e2){
+					JOptionPane.showMessageDialog(null, "El archivo indicado corresponde a una carpeta", "Error", JOptionPane.WARNING_MESSAGE);
+				}
+				textMuestraRuta.setText(s);
+			}
+		});
 		btnMostrarRuta.setEnabled(false);
 		btnMostrarRuta.setBounds(13, 271, 145, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnMostrarRuta);
@@ -138,11 +167,11 @@ public class VentanaPpal {
 		frmSistemaDeArchivos.getContentPane().add(textRuta);
 		textRuta.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(13, 344, 470, 20);
-		frmSistemaDeArchivos.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textMuestraRuta = new JTextField();
+		textMuestraRuta.setEditable(false);
+		textMuestraRuta.setBounds(13, 344, 470, 20);
+		frmSistemaDeArchivos.getContentPane().add(textMuestraRuta);
+		textMuestraRuta.setColumns(10);
 		
 		JLabel lblRuta = new JLabel("Ruta");
 		lblRuta.setEnabled(false);
@@ -166,11 +195,31 @@ public class VentanaPpal {
 		frmSistemaDeArchivos.getContentPane().add(lblNombreNuevo);
 		
 		JButton btnListarArchivos = new JButton("Listar Archivos");
+		btnListarArchivos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.listarArchivos()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
+			}
+		});
 		btnListarArchivos.setEnabled(false);
 		btnListarArchivos.setBounds(194, 255, 130, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnListarArchivos);
 		
 		JButton btnListarCarpetas = new JButton("Listar Carpetas");
+		btnListarCarpetas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String aux="";
+				textConsole.setText(aux);
+				for(String i:logica.listarArchivos()) {
+					aux+=i;
+				}
+				textConsole.setText(aux);
+			}
+		});
 		btnListarCarpetas.setEnabled(false);
 		btnListarCarpetas.setBounds(374, 255, 130, 23);
 		frmSistemaDeArchivos.getContentPane().add(btnListarCarpetas);
