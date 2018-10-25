@@ -31,27 +31,13 @@ public class VentanaPpal {
 	private JTextField textRaiz;
 	private JTextField textAddNew;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPpal window = new VentanaPpal();
-					window.frmSistemaDeArchivos.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
 	 */
 	public VentanaPpal() {
 		initialize();
+		frmSistemaDeArchivos.setVisible(true);
 	}
 
 	/**
